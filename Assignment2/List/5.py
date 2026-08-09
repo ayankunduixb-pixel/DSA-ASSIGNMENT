@@ -1,0 +1,20 @@
+# Iterate two lists simultaneously without using zip()
+
+# User input
+m = int(input("Enter size of first list: "))
+list1 = []
+print(f"Enter {m} elements for first list:")
+for i in range(m):
+    list1.append(input())
+
+n = int(input("Enter size of second list: "))
+list2 = []
+print(f"Enter {n} elements for second list:")
+for i in range(n):
+    list2.append(input())
+
+# Manual iteration
+print("Iterating both lists simultaneously:")
+min_len = m if m < n else n  # handle unequal lengths
+for i in range(min_len):
+    print(list1[i], list2[i])
