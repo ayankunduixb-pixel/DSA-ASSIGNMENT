@@ -1,0 +1,70 @@
+// Write a program to sort a given set of numbers using BST.
+
+#include <stdio.h>
+#include<stdlib.h>
+
+struct Node{
+    int data;
+    struct Node *left;
+    struct Node *right;
+};
+
+struct Node* createNode(int data){
+    struct Node *newNode;
+    newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+
+    return newNode;
+}
+
+struct Node* insert(struct Node *root, int data) {
+
+    // If tree is empty
+    if (root == NULL) {
+        return createNode(data);
+    }
+
+    // Insert into left subtree
+    if (data < root->data) {
+        root->left = insert(root->left, data);
+    }
+
+    // Insert into right subtree
+    else if (data > root->data) {
+        root->right = insert(root->right, data);
+    }
+
+    return root;
+}
+
+void inorder(struct Node *root) {
+    if (root == NULL) {
+        return;
+    }
+
+    inorder(root->left);
+    printf("%d ", root->data);
+    inorder(root->right);
+}
+
+int main() {
+    struct Node *root = NULL;
+    int n,data,i;
+
+    printf("Enter number of elements: ");
+    scanf("%d",&n);
+
+    printf("Enter the numbers:\n");
+
+    for(int i=0;i<n;i++){
+        scanf("%d",&data);
+        root = insert(root,data);
+    }
+
+    printf("Sorted numbers: ");
+    inorder(root);
+    
+    return 0;
+}
