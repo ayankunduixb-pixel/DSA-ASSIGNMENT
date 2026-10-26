@@ -7,6 +7,8 @@ struct Node {
     struct Node* next;
 };
 
+struct node *head = NULL;
+
 struct Node* createNode(int data){
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = data;
@@ -14,7 +16,7 @@ struct Node* createNode(int data){
     return newNode;
 }
 
-void printList(struct Node* head){
+void display(struct Node* head){
     struct Node* temp = head;
     while(temp != NULL){
         printf("%d -> ",temp->data);
