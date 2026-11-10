@@ -1,81 +1,60 @@
-// Write a program to implement BFS & DFS algorithm.
 #include <stdio.h>
 
-int a[20][20], visited[20], q[20];
-int n, i, f = 0, r = -1;
+int adj[20][20],visited[20],n;
 
-void bfs(int v)
-{
-    int i;
+void BFS(int start){
+    int queue[20],front = 0,rear = -1;
 
-    visited[v] = 1;
-    printf("%d ", v);
-
-    for(i = 1; i <= n; i++)
-    {
-        if(a[v][i] && !visited[i])
-        {
-            q[++r] = i;
-            visited[i] = 1;
-        }
+    for(int i = 0;i<n;i++){
+        visited[i] = 0;
     }
 
-    if(f <= r)
-        bfs(q[f++]);
-}
+    queue[++rear] = start;
+    visited[start] = 1;
 
-void dfs(int v)
-{
-    int i;
+    printf("BFS Traversal");
+    while(front <= rear){
+        int v = queue[front++];
+        printf("%d ",v);
 
-    visited[v] = 1;
-    printf("%d ", v);
-
-    for(i = 1; i <= n; i++)
-    {
-        if(a[v][i] && !visited[i])
-        {
-            dfs(i);
+        for(int i = 0;i<n;i++){
+            if(adj[v][i] == 1 && visited[i] == 0){
+                queue[++rear] = i;
+                visited[i] = 1;
+            }
         }
     }
 }
 
-int main()
-{
-    int edges, u, v, start;
+void DFS(int v){
+    int i;
+    visited[v] = 1;
+    printf("%d ",v);
 
-    printf("Enter number of vertices: ");
-    scanf("%d", &n);
+    for(int i = 0;i<n;i++){
+        if(adj[v][i] == 1 && visited[i] == 0){
+            DFS(i);
+        }
+    }
+}
 
-    printf("Enter number of edges: ");
-    scanf("%d", &edges);
+int main() {
+    printf("Enetr number of vertices: ");
+    scanf("%d",&n);
 
-    printf("Enter edges (u v):\n");
+    printf("Enter adjacency matrix:\n");
 
-    for(i = 0; i < edges; i++)
-    {
-        scanf("%d %d", &u, &v);
-        a[u][v] = 1;
-        a[v][u] = 1;
+    for(int i = 0;i<n;i++){
+        for(int j = 0;j<n;j++){
+            scanf("%d",&adj[i][j]);
+        }
     }
 
-    printf("Enter starting vertex: ");
+    int start;
+    printf("Enter starting vertex (0 to %d): ", n - 1);
     scanf("%d", &start);
 
-    printf("BFS Traversal: ");
-    for(i = 1; i <= n; i++)
-        visited[i] = 0;
-
-    f = 0;
-    r = -1;
-    bfs(start);
-
     printf("\nDFS Traversal: ");
-    for(i = 1; i <= n; i++)
-        visited[i] = 0;
-
-    dfs(start);
-
-    printf("\n");
+    DFS(start);
     return 0;
 }
