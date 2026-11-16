@@ -1,3 +1,4 @@
+// Write a program to print abbreviation of a given word. (1st letter of each word)
 #include<stdio.h>
 #include<string.h>
 int main(){

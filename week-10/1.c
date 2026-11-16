@@ -43,6 +43,9 @@ void preorder(struct Node *root){
 }
 
 void postorder(struct Node *root){
+    if(root == NULL){
+        return;
+    }
     postorder(root->left);
     postorder(root->right);
     printf("%d ",root->data);

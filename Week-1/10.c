@@ -39,8 +39,8 @@ int main(){
         merged[k++] = arr1[j++];
     }
     printf("Merged sorted array:\n");
-    for (int x = 0; x < m+n; x++) {
-        printf("%d ", merged[x]);
+    for (int i = 0; i < m+n; i++) {
+        printf("%d ", merged[i]);
     }
     return 0;
 }
