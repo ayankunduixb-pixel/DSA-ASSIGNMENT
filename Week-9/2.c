@@ -1,61 +1,37 @@
 // Check if a sub array with 0 sum exists or not.
 
 #include <stdio.h>
-#include<stdlib.h>
 
-#define SIZE 100
+int subArrayExists(int arr[],int n){
+    for(int i = 0;i<n;i++){
+        int sum = 0;
+        for(int j = 0;j<n;j++){
+            sum += arr[j];
 
-struct Node{
-    int key;
-    struct Node *next;
-};
-
-struct Node *hashTable[SIZE];
-
-int hash(int key){
-    if(key < 0){
-        key = -key;
-    }
-    return key % SIZE;
-}
-
-int search(int key){
-    int index = hash(key);
-    struct Node *temp = hashTable[index];
-
-    while(temp != NULL){
-        if(temp->key == key){
-            return 1;
-
-            temp = temp->next;
+            if(sum == 0){
+                return 1;
+            }
         }
     }
     return 0;
 }
 
-void insert(int key){
-    int index = hash(key);
-    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
-
-    newNode->key = key;
-    newNode->next = hashTable[index];
-    hashTable[index] = newNode;
-}
-
 int main() {
-    int n,i , sum = 0 ,found = 0;
-
-    printf("Enter number of elemnets: ");
+    int n;
+    printf("Enter number of elements: ");
     scanf("%d",&n);
 
     int arr[n];
-
-    printf("Enter the elemnets: ");
-
+    printf("Enter number of elements: ");
     for(int i = 0;i<n;i++){
         scanf("%d",&arr[i]);
     }
 
-    insert(0)
+    if(subArrayExists(arr,n)){
+        printf("Yes,subarray with sum 0 exist");
+    }
+    else{
+        printf("No,subarray with sum 0 deosn't exist");
+    }
     return 0;
 }

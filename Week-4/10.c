@@ -12,6 +12,65 @@ struct Node *poly1 = NULL;
 struct Node *poly2 = NULL;
 struct Node *result = NULL;
 
+struct Node* insert(struct Node* head,int coeff,int exp){
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->coeff = coeff;
+    newNode->exp = exp;
+    newNode->next = NULL;
+
+    if(head == NULL){
+        return newNode;
+    }
+    struct Node* temp = head;
+
+    while(temp->next != NULL){
+        temp = temp->next;
+    }
+    temp->next = newNode;
+    return head;
+}
+
+struct Node* addPoly(struct Node* p1, struct Node* p2){
+    struct Node* res = NULL;
+    while(p1 != NULL && p2 != NULL){
+        if(p1->exp == p2->exp){
+            res = insert(res,p1->coeff+p2->coeff,p1->exp);
+            p1 = p1->next;
+            p2 = p2->next;
+        }
+        else if(p1->exp > p2->exp){
+            res = insert(res,p1->coeff,p1->exp);
+            p1 = p1->next;
+        }
+        else{
+            res = insert(res,p2->coeff,p2->exp);
+            p2 = p2->next;
+        }
+    }
+    while(p1 != NULL){
+        res = insert(res,p1->coeff,p1->exp);
+        p1 = p1->next;
+    }
+    while(p2 != NULL){
+        res = insert(res,p2->coeff,p2->exp);
+        p2 = p2->next;
+    }
+    return res;
+}
+
+void display(struct Node* head){
+    struct Node* temp = head;
+    while(temp != NULL){
+        printf("%d^%d",temp->coeff,temp->exp);
+
+        if(temp->next != NULL){
+            printf("+");
+        }
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
 int main() {
 
     /* Polynomial 1: 5x² + 4x + 2 */

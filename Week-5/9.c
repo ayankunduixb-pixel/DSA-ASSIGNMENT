@@ -46,7 +46,7 @@ struct Node* reverseList(struct Node* head){
 void printList(struct Node* head) {
     struct Node* temp = head;
     while (temp != NULL) {
-        printf("%d -> ", temp->data);
+        printf("%d <-> ", temp->data);
         temp = temp->next;
     }
     printf("NULL\n");
